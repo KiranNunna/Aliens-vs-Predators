@@ -46,6 +46,12 @@ public class UnitActionSystem : MonoBehaviour
 			return;
 		}
 		
+		// If enemy's turn, ignore.
+		if(!TurnSystem.Instance.IsPlayerTurn())
+		{
+			return;
+		}
+		
 		if(EventSystem.current.IsPointerOverGameObject())
 		{
 			return;
@@ -92,6 +98,13 @@ public class UnitActionSystem : MonoBehaviour
 						// This unit is already selected
 						 return false;
 					}
+					
+					if(unit.IsEnemy())
+					{
+						// This unit is an enemy
+						return false;
+					}
+					
 					SetSelectedUnit(unit);
 					return true;
 				}
@@ -106,21 +119,22 @@ public class UnitActionSystem : MonoBehaviour
 		{
 			GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 			
-			if(selectedAction.IsValidActionGridPosition(mouseGridPosition))
+			if(!selectedAction.IsValidActionGridPosition(mouseGridPosition))
 			{
-				if(selectedUnit.CanSpendActionPointsToTakeAction(selectedAction))
-				{
-					if(selectedUnit.TrySpendingActionPointsToTakeAction(selectedAction))
-					{
-						SetBusy();
-						selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-					
-						if(OnActionStarted != null)
-							{
-								OnActionStarted(this, EventArgs.Empty);
-							}
-					}
-				}
+				return;
+			}
+			
+			if(!selectedUnit.TrySpendingActionPointsToTakeAction(selectedAction))
+			{
+				return;
+			}
+			
+			SetBusy();
+			selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+		
+			if(OnActionStarted != null)
+			{
+				OnActionStarted(this, EventArgs.Empty);
 			}
 		}
 	}

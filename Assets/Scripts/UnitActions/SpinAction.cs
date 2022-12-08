@@ -20,22 +20,21 @@ public class SpinAction : BaseAction
 		
 		if(totalSpinAmount >= 360)
 		{
-			isActive = false;
-			onActionComplete();
+			ActionComplete();
 		}
 	}
 	
 	public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
 	{
-		this.onActionComplete = onActionComplete;
-		isActive = true;
 		totalSpinAmount = 0f;
+		ActionStart(onActionComplete);
 	}
 	
 	public override string GetActionName()
 	{
 		return "Spin";
 	}
+	
 	public override List<GridPosition> GetValidActionGridPositionList()
 	{
 		GridPosition unitGridPosition = unit.GetGridPosition();
@@ -43,8 +42,17 @@ public class SpinAction : BaseAction
 		return new List<GridPosition>{unitGridPosition};
 	}
 
-    public override int GetActionPointsCost()
-    {
-        return 2;
-    }
+	public override int GetActionPointsCost()
+	{
+		return 1;
+	}
+	
+	public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+	{
+		return new EnemyAIAction
+		{
+			gridPosition = gridPosition,
+			actionValue = 0
+		};
+	}
 }

@@ -10,6 +10,7 @@ public class TurnSystem : MonoBehaviour
 	public event EventHandler OnTurnChanged;
 	
 	private int turnNumber = 1;
+	private bool isPlayerTurn = true;
 	
 	void Awake()
 	{
@@ -25,6 +26,7 @@ public class TurnSystem : MonoBehaviour
 	public void NextTurn()
 	{
 		turnNumber += 1;
+		isPlayerTurn = !isPlayerTurn;
 		
 		if(OnTurnChanged != null)
 		{
@@ -35,5 +37,10 @@ public class TurnSystem : MonoBehaviour
 	public int GetTurnNumber()
 	{
 		return this.turnNumber;
+	}
+	
+	public bool IsPlayerTurn()
+	{
+		return this.isPlayerTurn;
 	}
 }

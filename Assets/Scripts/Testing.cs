@@ -21,16 +21,16 @@ public class Testing : MonoBehaviour
 	// 	Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
 	// }
 	
-	[SerializeField] private Unit unit;
+	// [SerializeField] private Unit unit;
 	
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.T))
-		{
-			GridSystemVisual.Instance.HideAllGridPosition();
-			GridSystemVisual.Instance.ShowGridPositionList(
-				unit.GetMoveAction().GetValidActionGridPositionList()
-			);
-		}
-	}
+	// void Update()
+	// {
+	// 	if(Input.GetKeyDown(KeyCode.T))
+	// 	{
+	// 		GridSystemVisual.Instance.HideAllGridPosition();
+	// 		GridSystemVisual.Instance.ShowGridPositionList(
+	// 			unit.GetMoveAction().GetValidActionGridPositionList()
+	// 		);
+	// 	}
+	// }
 }
