@@ -19,7 +19,6 @@ public class UnitRagdollSpawner : MonoBehaviour
 		shootAction = GetComponent<ShootAction>();
 		
 		healthSystem.OnDead += HealthSystem_OnDead;
-
 		shootAction.OnShoot += ShootAction_OnShoot;
 	}
 	
