@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShootAction : BaseAction
 {
+	public static event EventHandler<OnShootEventArgs> OnAnyShoot;
 	public event EventHandler<OnShootEventArgs> OnShoot;
 	
 	public class OnShootEventArgs : EventArgs
@@ -92,19 +93,28 @@ public class ShootAction : BaseAction
 	
 	private void Shoot()
 	{
-		Debug.Log(this + "Shooter position is: " + unit.transform.position);
+		// Debug.Log(this + "Shooter position is: " + unit.transform.position);
 		if(OnShoot != null)
 		{
-			Debug.Log(this + "Shooter position is2: " + unit.transform.position);
+			// Debug.Log(this + "Shooter position is2: " + unit.transform.position);
 			OnShoot(this, new OnShootEventArgs
 			{
 				targetUnit = targetUnit,
 				shootingUnit = unit
 			});
-			targetUnit.Damage(40);
 		}
 		
-		
+		if(OnAnyShoot != null)
+		{
+			// Debug.Log(this + "Shooter position is2: " + unit.transform.position);
+			OnAnyShoot(this, new OnShootEventArgs
+			{
+				targetUnit = targetUnit,
+				shootingUnit = unit
+			});
+		}
+	
+		targetUnit.Damage(40);
 	}
 	
 	public override string GetActionName()

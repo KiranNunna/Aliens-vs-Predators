@@ -8,6 +8,7 @@ public class GridObject : MonoBehaviour
 	private GridSystem<GridObject> gridSystem;
 	
 	private List<Unit> unitList;
+	private IInteractable interactable;
 	
 	public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
 	{
@@ -53,5 +54,15 @@ public class GridObject : MonoBehaviour
 			return unitList[0];
 		}
 		return null;
+	}
+	
+	public IInteractable GetInteractable()
+	{
+		return this.interactable;
+	}
+	
+	public void SetInteractiable(IInteractable interactable)
+	{
+		this.interactable = interactable;
 	}
 }

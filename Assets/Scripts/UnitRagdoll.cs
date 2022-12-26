@@ -51,7 +51,7 @@ public class UnitRagdoll : MonoBehaviour
 		// Applying explosion
 		float offSet = 0.5f;
 		Vector3 explosionPosition = (((shooterPosition - this.transform.position).normalized) * offSet) + this.transform.position + new Vector3(0, explosionHeight, 0); // 1.7 is the neck height of the unit
-		Debug.Log("ShooterPosition: " + shooterPosition + "; " + "TargetPosition: " + this.transform.position + "; " + explosionPosition);
+		// Debug.Log("ShooterPosition: " + shooterPosition + "; " + "TargetPosition: " + this.transform.position + "; " + explosionPosition);
 		ApplyExplosionToRagdoll(ragdollRootBone, explosionForce, explosionPosition, explosionRange);
 	}
 	
